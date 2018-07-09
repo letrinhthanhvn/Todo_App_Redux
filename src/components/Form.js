@@ -60,9 +60,12 @@ class Form extends Component {
                         })
                     }}
                 />
-                <TouchableOpacity onPress={() => this.onAdd()}>
-                    <Text style={{ fontSize: 20 }}>Add</Text>
-                </TouchableOpacity>
+                <View style={styles.btnAddView}>
+                    <TouchableOpacity onPress={() => this.onAdd()}>
+                        <Text style={{ fontSize: 20, color: '#D1B272' }}>Add</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
         )
     }
@@ -74,6 +77,22 @@ const styles = StyleSheet.create({
     formView: {
         height: 150,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderRightWidth: 1,
+        borderLeftWidth: 1,
+        margin: 5,
+        borderRadius: 10
     },
+
+    btnAddView: {
+        backgroundColor: '#242223',
+        width: 60,
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 2,
+        borderColor: '#D1B272',
+        borderRadius: 5
+    }
 })
