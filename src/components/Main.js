@@ -4,11 +4,9 @@ import { connect } from 'react-redux'
 
 import {
     View,
-    Text,
     StyleSheet,
     FlatList,
-    TouchableOpacity,
-    TextInput
+    
 } from 'react-native';
 
 import Word from './Word'
@@ -36,26 +34,26 @@ class Main extends Component {
 
         if (myFilter === 'MEMORIZED') return myWords.filter((item) => item.memorized === true)
         if (myFilter === 'NEED_PRACTICE') return myWords.filter((item) => item.memorized === false)
-        return myWords
+        return myWords  
     }
 
     render() {
 
-        console.log('props', this.props)
+        // console.log('props', this.props)
         return (
             <View style={styles.conatiner}>
-                <Header />
+                <Header {...this.props} />
 
                 <View style={styles.flatView}>
-                    {this.props.myIsAdding ? <Form /> : null}
+                    {this.props.myIsAdding ? <Form {...this.props}/> : null}
                     <FlatList
                         data={this.getFilterWords()}
-                        renderItem={({ item }) => <Word myWord={item} />}
+                        renderItem={({ item }) => <Word  myWord={item} {...this.props}/>}
                         keyExtractor={(item) => String(item.id)}
                     />
                 </View>
 
-                <Filter />
+                <Filter {...this.props}/>
 
             </View>
         )
@@ -65,10 +63,6 @@ class Main extends Component {
 const styles = StyleSheet.create({
     conatiner: {
         flex: 1,
-        // backgroundColor: 'green',
-        //  justifyContent: 'center',
-        //  alignItems: 'center',
-        // marginTop: 30
     },
 
     flatView: {
@@ -79,12 +73,12 @@ const styles = StyleSheet.create({
 
 })
 
-function mapStateToProps(state) {
-    return {
-        myFilter: state.filterStatus,
-        myWords: state.arrWords,
-        myIsAdding: state.isAdding
-    }
-}
+// function mapStateToProps(state) {
+//     return {
+//         myFilter: state.filterStatus,
+//         myWords: state.arrWords,
+//         myIsAdding: state.isAdding
+//     }
+// }
 
-export default connect(mapStateToProps)(Main)
+export default connect()(Main)

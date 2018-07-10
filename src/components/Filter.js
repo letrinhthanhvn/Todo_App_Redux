@@ -31,18 +31,20 @@ class Filter extends Component {
 
     getStyleText(statusName) {
 
-        const { filterStatus } = this.props
+        const { myFilter } = this.props
 
-        if (statusName === filterStatus) {
+        console.log('myFilter', myFilter)
+
+        if (statusName === myFilter) {
             return { color: '#D1B272', fontWeight: 'bold' }
         } else {
             return { color: 'white' }
         }
     }
 
-    changeStatus(actionType) {
-        this.props.dispatch({ type: actionType })
-    }
+    // changeStatus(actionType) {
+    //     this.props.dispatch({ type: actionType })
+    // }
 
     render() {
         return (
@@ -55,19 +57,19 @@ class Filter extends Component {
                 <BtnBottom textButton='NEED PRACTICE' /> */}
 
                 <View style={styleBtn.btnView}>
-                    <TouchableOpacity onPress={() => this.changeStatus("FILTER_SHOW_ALL")}>
+                    <TouchableOpacity onPress={() => this.props.showAllMode()}>
                         <Text style={[{ textAlign: 'center' }, this.getStyleText("SHOW_ALL")]}>SHOW_ALL</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styleBtn.btnView}>
-                    <TouchableOpacity onPress={() => this.changeStatus("FILTER_MEMORIZED")}>
+                    <TouchableOpacity onPress={() => this.props.showMemorizedMode()}>
                         <Text style={[{ textAlign: 'center' }, this.getStyleText('MEMORIZED')]}>MEMORIZED</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styleBtn.btnView}>
-                    <TouchableOpacity onPress={() => this.changeStatus("FILTER_NEED_PRACTICE")}>
+                    <TouchableOpacity onPress={() => this.props.showNeedPracticeMode()}>
                         <Text style={[{ textAlign: 'center' }, this.getStyleText('NEED_PRACTICE')]}>NEED PRACTICE</Text>
                     </TouchableOpacity>
                 </View>
@@ -100,10 +102,10 @@ const styleBtn = StyleSheet.create({
     }
 })
 
-function mapStateToProps(state) {
-    return {
-        filterStatus: state.filterStatus
-    }
-}
+// function mapStateToProps(state) {
+//     return {
+//         filterStatus: state.filterStatus
+//     }
+// }
 
-export default connect(mapStateToProps)(Filter)
+export default connect()(Filter)

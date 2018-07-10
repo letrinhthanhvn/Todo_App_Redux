@@ -16,9 +16,7 @@ class Header extends Component {
                 <Text style={{ fontSize: 25, fontWeight: 'bold', position: 'absolute', top: 45}}>My Words</Text>
                 <TouchableOpacity
                     style={{ flex: 1, position: 'absolute', top: 40, right: 5 }}
-                    onPress={() =>this.props.dispatch({
-                        type: 'TOGGLE_IS_ADDING'
-                    })}
+                    onPress={() =>this.props.addForm()}
                 >
                     <Text style={{ fontSize: 30 }}>+</Text>
                 </TouchableOpacity>

@@ -11,25 +11,19 @@ import { connect } from 'react-redux'
 
 class Word extends Component {
 
-    memorizedWord() {
+    memorizedWord(id) {
         
-        this.props.dispatch({
-            type: 'TOGGLE_MEMORIZED',
-            id: this.props.myWord.id,
-        })
-        console.log('dispatch', this.props.myWord.memorized)
+        this.props.toggleMemorized(id)
+        // console.log('id', id)
     }
 
-    showWord() {
-        this.props.dispatch({
-            type: "TOGGLE_SHOW",
-            id: this.props.myWord.id
-        })
+    showWord(id) {
+        this.props.toggleShow(id)
     }
 
     render() {
-
-        const { en, vn, memorized, isShow } = this.props.myWord
+        console.log('myWord', this.props.myWord)
+        const { en, vn, memorized, isShow, id } = this.props.myWord
         const textDecorationLine = memorized ? 'line-through' : 'none'
         const memorizedText = memorized ? 'forget' : 'memorized'
         const showText = isShow ? 'UnShow' : 'Show'
@@ -44,11 +38,11 @@ class Word extends Component {
                 </View>
 
                 <View style={styles.btnView}>
-                    <TouchableOpacity style={styles.viewPerBtn} onPress={this.memorizedWord.bind(this)}>
+                    <TouchableOpacity style={styles.viewPerBtn} onPress={() => this.memorizedWord(id)}>
                         <Text style={{ textAlign: 'center', fontSize: 20, color: '#D1B272' }}>{memorizedText}</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.viewPerBtn} onPress={this.showWord.bind(this)}>
+                    <TouchableOpacity style={styles.viewPerBtn} onPress={()=> this.showWord(id)}>
                         <Text style={{ textAlign: 'center', fontSize: 20, color: '#D1B272' }}>{showText}</Text>
                     </TouchableOpacity>
                 </View>

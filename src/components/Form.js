@@ -19,29 +19,20 @@ class Form extends Component {
             en: '',
             vn: ''
         }
-
-
     }
 
-    onAdd() {
-
-        if (this.state.en == '' || this.state.vn == '') {
+    onAdd(word) {
+        // console.log('en, vn', word.en, word.vn)
+        if (word.en == '' || word.vn == '') {
             alert("Please type English Word and Vietnamese")
         } else {
-            this.props.dispatch({
-                type: "ADD_WORD",
-                en: this.state.en,
-                vn: this.state.vn,
-
-            });
-
-            this.props.dispatch({
-                type: "TOGGLE_IS_ADDING"
-            })
+            this.props.addWords(word)
+            this.props.addForm()
         }
 
     }
     render() {
+        console.log('props', this.props)
         return (
             <View style={styles.formView}>
                 <TextInput style={{ backgroundColor: '#bfbfbf', height: 40, width: 350, marginBottom: 10, paddingLeft: 10 }}
@@ -61,7 +52,7 @@ class Form extends Component {
                     }}
                 />
                 <View style={styles.btnAddView}>
-                    <TouchableOpacity onPress={() => this.onAdd()}>
+                    <TouchableOpacity onPress={() => this.onAdd({en: this.state.en,vn: this.state.vn})}>
                         <Text style={{ fontSize: 20, color: '#D1B272' }}>Add</Text>
                     </TouchableOpacity>
                 </View>
